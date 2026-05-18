@@ -73,6 +73,7 @@ npm run release:minor                # 发布 API 破坏性变更
 - `docs/architecture.md` — 项目整体架构分析与设计思路
 - `docs/tool-system.md` — 工具系统详细设计：三层接口、7 个内置工具、执行管线、截断系统、事件机制、TUI 渲染与扩展方式
 - `docs/prompt-and-context.md` — 提示词与上下文管理：系统提示词构建、扩展注入、消息类型体系、会话树存储、上下文压缩、溢出恢复、分支摘要
+- `docs/session-history-memory.md` — 会话历史与记忆管理系统：三存储后端、会话树结构、分支/分叉/克隆操作、上下文压缩、溢出检测与恢复、消息转换管线
 
 ## 工作目的
 
