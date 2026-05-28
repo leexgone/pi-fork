@@ -2,6 +2,40 @@
 
 ## [Unreleased]
 
+## [0.76.0] - 2026-05-27
+
+### Added
+
+- Added an opt-in Markdown renderer option to preserve source ordered-list markers for transcript rendering ([#5013](https://github.com/earendil-works/pi/issues/5013)).
+
+### Fixed
+
+- Fixed `Shift+Enter` in Apple Terminal by detecting local macOS modifier state when Terminal.app sends plain Return.
+- Fixed Windows Terminal capability detection to enable OSC 8 hyperlinks, preserving clickable long URLs across wrapped lines ([#4923](https://github.com/earendil-works/pi/issues/4923)).
+- Fixed JetBrains terminal capability detection to enable truecolor while disabling unsupported OSC 8 hyperlinks ([#5037](https://github.com/earendil-works/pi-mono/pull/5037) by [@Perlence](https://github.com/Perlence)).
+- Fixed editor and input word navigation/deletion to use Unicode word boundaries while preserving ASCII punctuation boundaries ([#5022](https://github.com/earendil-works/pi-mono/pull/5022) by [@haoqixu](https://github.com/haoqixu), [#5067](https://github.com/earendil-works/pi-mono/pull/5067) by [@haoqixu](https://github.com/haoqixu), [#5068](https://github.com/earendil-works/pi-mono/pull/5068) by [@haoqixu](https://github.com/haoqixu)).
+
+## [0.75.5] - 2026-05-23
+
+### Changed
+
+- Replaced the optional `koffi` dependency for Windows VT input with a tiny vendored native helper, reducing install size while preserving Shift+Tab handling ([#4480](https://github.com/earendil-works/pi/issues/4480)).
+
+## [0.75.4] - 2026-05-20
+
+### Changed
+
+- Removed the package-level development watch script now that the root TypeScript check validates strip-only-compatible sources.
+
+### Fixed
+
+- Fixed loader initialization so indicator startup cannot run before frames are initialized.
+- Fixed truecolor capability detection to align terminal image rendering with the interactive theme detector.
+
+## [0.75.3] - 2026-05-18
+
+## [0.75.2] - 2026-05-18
+
 ## [0.75.1] - 2026-05-18
 
 ## [0.75.0] - 2026-05-17

@@ -41,8 +41,10 @@ export function setCellDimensions(dims: CellDimensions): void {
 
 export function detectCapabilities(): TerminalCapabilities {
 	const termProgram = process.env.TERM_PROGRAM?.toLowerCase() || "";
+	const terminalEmulator = process.env.TERMINAL_EMULATOR?.toLowerCase() || "";
 	const term = process.env.TERM?.toLowerCase() || "";
 	const colorTerm = process.env.COLORTERM?.toLowerCase() || "";
+	const hasTrueColorHint = colorTerm === "truecolor" || colorTerm === "24bit";
 
 	// tmux and screen swallow OSC 8 by default (passthrough is opt-in and wraps
 	// sequences differently). Force hyperlinks off whenever we detect them, even
@@ -50,8 +52,7 @@ export function detectCapabilities(): TerminalCapabilities {
 	// also unreliable under tmux/screen, so leave `images: null` for safety.
 	const inTmuxOrScreen = !!process.env.TMUX || term.startsWith("tmux") || term.startsWith("screen");
 	if (inTmuxOrScreen) {
-		const trueColor = colorTerm === "truecolor" || colorTerm === "24bit";
-		return { images: null, trueColor, hyperlinks: false };
+		return { images: null, trueColor: hasTrueColorHint, hyperlinks: false };
 	}
 
 	if (process.env.KITTY_WINDOW_ID || termProgram === "kitty") {
@@ -70,6 +71,10 @@ export function detectCapabilities(): TerminalCapabilities {
 		return { images: "iterm2", trueColor: true, hyperlinks: true };
 	}
 
+	if (process.env.WT_SESSION) {
+		return { images: null, trueColor: true, hyperlinks: true };
+	}
+
 	if (termProgram === "vscode") {
 		return { images: null, trueColor: true, hyperlinks: true };
 	}
@@ -78,12 +83,15 @@ export function detectCapabilities(): TerminalCapabilities {
 		return { images: null, trueColor: true, hyperlinks: true };
 	}
 
+	if (terminalEmulator === "jetbrains-jediterm") {
+		return { images: null, trueColor: true, hyperlinks: false };
+	}
+
 	// Unknown terminal: be conservative. OSC 8 is rendered invisibly as "just
 	// text" on terminals that swallow it, which means the URL disappears from
 	// the rendered output. Default to the legacy `text (url)` behavior unless we
 	// have positively identified a hyperlink-capable terminal above.
-	const trueColor = colorTerm === "truecolor" || colorTerm === "24bit";
-	return { images: null, trueColor, hyperlinks: false };
+	return { images: null, trueColor: hasTrueColorHint, hyperlinks: false };
 }
 
 export function getCapabilities(): TerminalCapabilities {

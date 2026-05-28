@@ -6,7 +6,7 @@ import type {
 	ChatCompletionContentPartText,
 	ChatCompletionCreateParamsNonStreaming,
 } from "openai/resources/chat/completions.js";
-import { getEnvApiKey } from "../../env-api-keys.js";
+import { getEnvApiKey } from "../../env-api-keys.ts";
 import type {
 	AssistantImages,
 	ImageContent,
@@ -15,9 +15,9 @@ import type {
 	ImagesModel,
 	ImagesOptions,
 	TextContent,
-} from "../../types.js";
-import { headersToRecord } from "../../utils/headers.js";
-import { sanitizeSurrogates } from "../../utils/sanitize-unicode.js";
+} from "../../types.ts";
+import { headersToRecord } from "../../utils/headers.ts";
+import { sanitizeSurrogates } from "../../utils/sanitize-unicode.ts";
 
 interface OpenRouterGeneratedImage {
 	image_url?: string | { url?: string };
@@ -63,7 +63,7 @@ export const generateImagesOpenRouter: ImagesFunction<"openrouter-images", Image
 		const requestOptions = {
 			...(options?.signal ? { signal: options.signal } : {}),
 			...(options?.timeoutMs !== undefined ? { timeout: options.timeoutMs } : {}),
-			...(options?.maxRetries !== undefined ? { maxRetries: options.maxRetries } : {}),
+			maxRetries: options?.maxRetries ?? 0,
 		};
 		const { data: response, response: rawResponse } = await client.chat.completions
 			.create(params as unknown as ChatCompletionCreateParamsNonStreaming, requestOptions)

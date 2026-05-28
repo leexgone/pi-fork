@@ -1,5 +1,5 @@
 import { describe, expect, test } from "vitest";
-import { parseArgs } from "../src/cli/args.js";
+import { parseArgs } from "../src/cli/args.ts";
 
 describe("parseArgs", () => {
 	describe("--version flag", () => {
@@ -128,6 +128,11 @@ describe("parseArgs", () => {
 		test("parses --session", () => {
 			const result = parseArgs(["--session", "/path/to/session.jsonl"]);
 			expect(result.session).toBe("/path/to/session.jsonl");
+		});
+
+		test("parses --session-id", () => {
+			const result = parseArgs(["--session-id", "orchestrated-session"]);
+			expect(result.sessionId).toBe("orchestrated-session");
 		});
 
 		test("parses --fork", () => {
