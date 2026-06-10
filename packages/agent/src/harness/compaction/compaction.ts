@@ -281,6 +281,7 @@ function findValidCutPoints(entries: SessionTreeEntry[], startIndex: number, end
 			}
 			case "thinking_level_change":
 			case "model_change":
+			case "active_tools_change":
 			case "compaction":
 			case "branch_summary":
 			case "custom":
@@ -375,7 +376,7 @@ export function findCutPoint(
 	};
 }
 
-export const SUMMARIZATION_SYSTEM_PROMPT = `You are a context summarization assistant. Your task is to read a conversation between a user and an AI coding assistant, then produce a structured summary following the exact format specified.
+export const SUMMARIZATION_SYSTEM_PROMPT = `You are a context summarization assistant. Your task is to read a conversation between a user and an AI assistant, then produce a structured summary following the exact format specified.
 
 Do NOT continue the conversation. Do NOT respond to any questions in the conversation. ONLY output the structured summary.`;
 

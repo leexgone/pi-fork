@@ -2,6 +2,48 @@
 
 ## [Unreleased]
 
+## [0.79.1] - 2026-06-09
+
+### Added
+
+- Added `AutocompleteProvider.triggerCharacters` so editor autocomplete can naturally trigger on provider-defined token prefixes ([#4703](https://github.com/earendil-works/pi/issues/4703)).
+
+### Fixed
+
+- Fixed IME hardware cursor positioning while slash-command autocomplete is visible ([#5283](https://github.com/earendil-works/pi/pull/5283) by [@smoosex](https://github.com/smoosex)).
+- Fixed prompt history navigation to restore the current draft when returning from history browsing ([#5494](https://github.com/earendil-works/pi/issues/5494)).
+- Fixed wrapping for mixed Latin and CJK text so unspaced CJK runs can break at grapheme boundaries without leaving large trailing gaps ([#5495](https://github.com/earendil-works/pi/issues/5495)).
+
+## [0.79.0] - 2026-06-08
+
+### Fixed
+
+- Fixed prompt history navigation to place the cursor at the start when browsing upward and at the end when browsing downward, so repeated Up/Down traverses multiline prompts immediately ([#5454](https://github.com/earendil-works/pi/issues/5454)).
+- Fixed intermittent Shift+Enter handling by making Kitty keyboard protocol fallback response-driven instead of timeout-driven ([#5188](https://github.com/earendil-works/pi/issues/5188)).
+- Fixed TUI rendering to clear stale lines when content shrinks to zero.
+- Fixed autocomplete suggestions to re-query after editor cursor movement ([#5499](https://github.com/earendil-works/pi/pull/5499) by [@Roman-Galeev](https://github.com/Roman-Galeev)).
+
+## [0.78.1] - 2026-06-04
+
+### Fixed
+
+- Fixed overlay focus restoration so non-capturing overlays remain interactive after UI rerenders and explicit focus release ([#5235](https://github.com/earendil-works/pi/pull/5235) by [@nicobailon](https://github.com/nicobailon)).
+- Fixed tab width accounting in column slicing and overlay compositing so tab-containing output cannot exceed the terminal width ([#5218](https://github.com/earendil-works/pi/issues/5218)).
+
+## [0.78.0] - 2026-05-29
+
+### Fixed
+
+- Fixed ANSI text wrapping to avoid stack overflows on very long wrapped lines ([#5185](https://github.com/earendil-works/pi-mono/issues/5185)).
+- Clarified the IME hardware cursor docs to state that cursor visibility remains opt-in ([#5200](https://github.com/earendil-works/pi-mono/issues/5200)).
+- Fixed OSC 8 hyperlinks to pass through tmux when the client supports them ([#5189](https://github.com/earendil-works/pi-mono/pull/5189) by [@mpazik](https://github.com/mpazik)).
+
+## [0.77.0] - 2026-05-28
+
+### Fixed
+
+- Fixed keyboard protocol negotiation to ignore mismatched or delayed terminal responses, avoiding false Kitty keyboard protocol detection ([#5091](https://github.com/earendil-works/pi/pull/5091) by [@mitsuhiko](https://github.com/mitsuhiko)).
+
 ## [0.76.0] - 2026-05-27
 
 ### Added
